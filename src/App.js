@@ -4,6 +4,7 @@ import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
 
 const App = () => {
+
   const [todos, setTodos] = useState([
     {
       id: 1,
@@ -35,11 +36,18 @@ const App = () => {
     },
     [todos],
   );
+  
+  const onRemove = useCallback(
+    id => {
+      setTodos(todos.filter(todo=> todo.id !== id));
+    },
+    [todos],
+  );
 
   return (
   <Todotemplate>
     <TodoInsert onInsert={onInsert}/>
-    <TodoList todos={todos}/>
+    <TodoList todos={todos} onRemove={onRemove} />
   </Todotemplate>
   );
 };
